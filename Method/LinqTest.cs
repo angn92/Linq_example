@@ -41,7 +41,7 @@ namespace Linq_example.Method
             //var amoutOfElementsQuery = (from s in testData
             //                            where s.Age > 20 && s.Age < 25
             //                            select s ).Count();
-                                       
+
 
             //Console.WriteLine("Metod syntax:");
             //PrintResultOnTheScreen(amoutOfElementsMethod);
@@ -50,30 +50,61 @@ namespace Linq_example.Method
             //PrintResultOnTheScreen(amoutOfElementsMethod);
 
 
-            //Asc
-            var orderTestAscMethod = testData.OrderBy(x => x.FirstName).Take(5);
-            var orderTestDesMethod = testData.OrderByDescending(x => x.Age).Take(5);
+            ////Asc for method syntax we're sorting by one field but if we want to sort through other field we use method 'ThenBy'
+            //var orderTestAscMethod = testData.OrderBy(x => x.FirstName)
+            //                        .ThenBy(x => x.Age)
+            //                        .Take(5);
+            //var orderTestDesMethod = testData.OrderByDescending(x => x.Age).Take(5);
 
-            var orderTestAscQuery = (from s in testData
-                                    orderby s.FirstName ascending
-                                    select s).Take(5);
 
-            var orderTestDesQuery = (from s in testData
-                                     orderby s.Age descending
-                                     select s).Take(5);
+            //// In query syntax multiple sorting looks like below after comma separated we put next field
+            //var orderTestAscQuery = (from s in testData
+            //                        orderby s.FirstName, s.Address.City ascending
+            //                        select s).Take(5);
 
-            Console.WriteLine("Metod syntax:");
-            Console.WriteLine("Asc");
-            PrintResultOnTheScreen(orderTestAscMethod);
-            Console.WriteLine("Des");
-            PrintResultOnTheScreen(orderTestDesMethod);
+            //var orderTestDesQuery = (from s in testData
+            //                         orderby s.Age descending
+            //                         select s).Take(5);
+
+            //Console.WriteLine("Metod syntax:");
+            //Console.WriteLine("Asc");
+            //PrintResultOnTheScreen(orderTestAscMethod);
+            //Console.WriteLine("Des");
+            //PrintResultOnTheScreen(orderTestDesMethod);
+            //Console.WriteLine();
+            //Console.WriteLine("Query syntax");
+            //Console.WriteLine("Asc");
+            //PrintResultOnTheScreen(orderTestAscQuery);
+            //Console.WriteLine("Dsc");
+            //PrintResultOnTheScreen(orderTestDesQuery);
+
+            Console.WriteLine("Method syntax");
+            var groupTestMethod = testData.GroupBy(x => x.Address.City);
+
+            foreach(var gtm in groupTestMethod)
+            {
+                Console.WriteLine($"Group name: {gtm.Key}");
+                foreach (var item in gtm)
+                {
+                    Console.WriteLine($"Name: {item.FirstName}, Age: {item.Age}");
+                }
+            }
+
             Console.WriteLine();
-            Console.WriteLine("Query syntax");
-            Console.WriteLine("Asc");
-            PrintResultOnTheScreen(orderTestAscQuery);
-            Console.WriteLine("Dsc");
-            PrintResultOnTheScreen(orderTestDesQuery);
+            Console.WriteLine("Query sytntax");
 
+            var groupTestQuery = from s in testData
+                                 orderby s.Age ascending
+                                 group s by s.Age;
+
+            foreach(var gtq in groupTestQuery)
+            {
+                Console.WriteLine($"Group name: {gtq.Key}");
+                foreach (var item in gtq)
+                {
+                    Console.WriteLine($"Name: {item.FirstName}, City: {item.Address.City}");
+                }
+            }
 
         }
 
