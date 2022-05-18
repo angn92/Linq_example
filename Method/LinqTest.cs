@@ -78,31 +78,81 @@ namespace Linq_example.Method
             //Console.WriteLine("Dsc");
             //PrintResultOnTheScreen(orderTestDesQuery);
 
-            Console.WriteLine("Method syntax");
-            var groupTestMethod = testData.GroupBy(x => x.Address.City);
+            //Console.WriteLine("Method syntax");
+            //var groupTestMethod = testData.GroupBy(x => x.Address.City);
 
-            foreach(var gtm in groupTestMethod)
+            //foreach(var gtm in groupTestMethod)
+            //{
+            //    Console.WriteLine($"Group name: {gtm.Key}");
+            //    foreach (var item in gtm)
+            //    {
+            //        Console.WriteLine($"Name: {item.FirstName}, Age: {item.Age}");
+            //    }
+            //}
+
+            //Console.WriteLine();
+            //Console.WriteLine("Query sytntax");
+
+            //var groupTestQuery = from s in testData
+            //                     orderby s.Age ascending
+            //                     group s by s.Age;
+
+            //foreach(var gtq in groupTestQuery)
+            //{
+            //    Console.WriteLine($"Group name: {gtq.Key}");
+            //    foreach (var item in gtq)
+            //    {
+            //        Console.WriteLine($"Name: {item.FirstName}, City: {item.Address.City}");
+            //    }
+            //}
+
+            var clubList = new List<Club>
             {
-                Console.WriteLine($"Group name: {gtm.Key}");
-                foreach (var item in gtm)
-                {
-                    Console.WriteLine($"Name: {item.FirstName}, Age: {item.Age}");
-                }
-            }
+                new Club { Id = 1, Name = "Manchester Utd", CountryId = 1 },
+                new Club { Id = 2, Name = "Real", CountryId = 2 },
+                new Club { Id = 3, Name = "Barcelona", CountryId = 2 },
+                new Club { Id = 4, Name = "Manchester City", CountryId = 1 },
+                new Club { Id = 5, Name = "Bayern", CountryId = 3 },
+                new Club { Id = 6, Name = "Liverpool", CountryId = 1 },
+                new Club { Id = 7, Name = "Schalke", CountryId = 3 },
+                new Club { Id = 8, Name = "Borussia", CountryId = 3 },
+                new Club { Id = 9, Name = "Chelsea", CountryId = 1 },
+                new Club { Id = 10, Name = "Arsenal", CountryId = 1 },
+                new Club { Id = 11, Name = "Inter", CountryId = 4 },
+                new Club { Id = 12, Name = "Milan", CountryId = 4 },
+                new Club { Id = 13, Name = "Monaco", CountryId = 5 },
+                new Club { Id = 14, Name = "Sevilla", CountryId = 2 },
+                new Club { Id = 15, Name = "Tottenham", CountryId = 1 },
+                new Club { Id = 15, Name = "PSG", CountryId = 5 },
+                new Club { Id = 16, Name = "Roma", CountryId = 4 },
+                new Club { Id = 17, Name = "RB Leipzig", CountryId = 3 }
+            };
 
-            Console.WriteLine();
-            Console.WriteLine("Query sytntax");
-
-            var groupTestQuery = from s in testData
-                                 orderby s.Age ascending
-                                 group s by s.Age;
-
-            foreach(var gtq in groupTestQuery)
+            var countryList = new List<Country>
             {
-                Console.WriteLine($"Group name: {gtq.Key}");
-                foreach (var item in gtq)
+                new Country { Id = 1, CountryName = "England", ListClubs = clubList.Where(x => x.CountryId == 1).ToList() },
+                new Country { Id = 2, CountryName = "Spain", ListClubs = clubList.Where(x => x.CountryId == 2).ToList() },
+                new Country { Id = 3, CountryName = "Germany", ListClubs = clubList.Where(x => x.CountryId == 3).ToList() },
+                new Country { Id = 4, CountryName = "Italy", ListClubs = clubList.Where(x => x.CountryId == 4).ToList() },
+                new Country { Id = 5, CountryName = "France", ListClubs = clubList.Where(x => x.CountryId == 5).ToList() }
+            };
+
+            var joinTestMethod = clubList.Join(countryList,
+                                                club => club.CountryId,
+                                                country => country.Id,
+                                                (club, country) => new
+                                                {
+                                                    Name = club.Name,
+                                                    Country = country.CountryName
+                                                }).GroupBy(x => x.Country);
+
+
+            foreach (var jtm in joinTestMethod)
+            {
+                Console.WriteLine($"Group name: {jtm.Key}");
+                foreach (var item in jtm)
                 {
-                    Console.WriteLine($"Name: {item.FirstName}, City: {item.Address.City}");
+                    Console.WriteLine($"Name: {item.Name}, City: {item.Country}");
                 }
             }
 
