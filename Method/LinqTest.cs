@@ -137,25 +137,57 @@ namespace Linq_example.Method
                 new Country { Id = 5, CountryName = "France", ListClubs = clubList.Where(x => x.CountryId == 5).ToList() }
             };
 
-            var joinTestMethod = clubList.Join(countryList,
-                                                club => club.CountryId,
-                                                country => country.Id,
-                                                (club, country) => new
-                                                {
-                                                    Name = club.Name,
-                                                    Country = country.CountryName
-                                                }).GroupBy(x => x.Country);
+            //// In this example clubList is outer sequence
+            //// countryList is inner sequence, next we define which field should be match using lambda from first and second collection
+            //// Matched elements are adding to result 
+            //var joinTestMethod = clubList.Join(countryList,
+            //                                    club => club.CountryId,
+            //                                    country => country.Id,
+            //                                    (club, country) => new
+            //                                    {
+            //                                        Name = club.Name,
+            //                                        Country = country.CountryName
+            //                                    }).GroupBy(x => x.Country);
 
 
-            foreach (var jtm in joinTestMethod)
+            //foreach (var jtm in joinTestMethod)
+            //{
+            //    Console.WriteLine($"Group name: {jtm.Key}");
+            //    foreach (var item in jtm)
+            //    {
+            //        Console.WriteLine($"Name: {item.Name}, City: {item.Country}");
+            //    }
+            //}
+
+            //Console.WriteLine("Query:\n");
+
+            //var joinTestQuery = from club in clubList 
+            //                    join country in countryList
+            //                    on club.CountryId equals country.Id
+            //                    select new { Name = club.Name, Country = country.CountryName };
+
+            //PrintResultOnTheScreen(joinTestQuery);
+
+            Console.WriteLine("Query Group join:\n");
+
+            var groupJoinQuery = from country in countryList
+                                 join club in clubList
+                                 on country.Id equals club.CountryId
+                                 into countryGroup
+                                 select new
+                                 {
+                                     Club = countryGroup,
+                                     Country = country.CountryName
+                                 };
+
+            foreach (var item in groupJoinQuery)
             {
-                Console.WriteLine($"Group name: {jtm.Key}");
-                foreach (var item in jtm)
+                Console.WriteLine($"\n{item.Country}\n");
+                foreach (var club in item.Club)
                 {
-                    Console.WriteLine($"Name: {item.Name}, City: {item.Country}");
+                    Console.WriteLine(club.Name);
                 }
             }
-
         }
 
         private void PrintResultOnTheScreen(IEnumerable<Person> list)
