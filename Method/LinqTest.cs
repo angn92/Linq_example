@@ -6,105 +6,105 @@ namespace Linq_example.Method
     {
         public void TestMethod(IEnumerable<Person> testData)
         {
-            //var findByNameMethod = testData.Where(x => x.FirstName == "Adam" && (x.Age >= 21 && x.Age < 30));
+            var findByNameMethod = testData.Where(x => x.FirstName == "Adam" && (x.Age >= 21 && x.Age < 30));
 
-            //var findByNameQuery = from list in testData
-            //                      where list.FirstName == "Adam" && list.Age >= 21 && list.Age < 30
-            //                      select list;
+            var findByNameQuery = from list in testData
+                                  where list.FirstName == "Adam" && list.Age >= 21 && list.Age < 30
+                                  select list;
 
-            //Console.WriteLine("Metod syntax:");
-            //PrintResultOnTheScreen(findByNameMethod);
-            //Console.WriteLine();
-            //Console.WriteLine("Query syntax");
-            //PrintResultOnTheScreen(findByNameQuery);
-
-
-
-            //var findByAddressMethod = testData.Where(x => x.Address.City == "Kraków")
-            //                            .Select(z => new { Name = z.FirstName, Age = z.Age, City = z.Address.City });
-
-            //var findByAddressQuery = from s in testData
-            //                         where s.Address.City == "Kraków"
-            //                         select new { Name = s.FirstName, Age = s.Age, City = s.Address.City };
-
-            //Console.WriteLine("Metod syntax:");
-            //PrintResultOnTheScreen(findByAddressMethod);
-            //Console.WriteLine();
-            //Console.WriteLine("Query syntax");
-            //PrintResultOnTheScreen(findByAddressQuery);
+            Console.WriteLine("Metod syntax:");
+            PrintResultOnTheScreen(findByNameMethod);
+            Console.WriteLine();
+            Console.WriteLine("Query syntax");
+            PrintResultOnTheScreen(findByNameQuery);
 
 
 
-            //var amoutOfElementsMethod = testData.Where(x => x.Age > 20 && x.Age < 25)
-            //                              .Count();
+            var findByAddressMethod = testData.Where(x => x.Address.City == "Kraków")
+                                        .Select(z => new { Name = z.FirstName, Age = z.Age, City = z.Address.City });
 
-            //var amoutOfElementsQuery = (from s in testData
-            //                            where s.Age > 20 && s.Age < 25
-            //                            select s ).Count();
+            var findByAddressQuery = from s in testData
+                                     where s.Address.City == "Kraków"
+                                     select new { Name = s.FirstName, Age = s.Age, City = s.Address.City };
 
-
-            //Console.WriteLine("Metod syntax:");
-            //PrintResultOnTheScreen(amoutOfElementsMethod);
-            //Console.WriteLine();
-            //Console.WriteLine("Query syntax");
-            //PrintResultOnTheScreen(amoutOfElementsMethod);
-
-
-            ////Asc for method syntax we're sorting by one field but if we want to sort through other field we use method 'ThenBy'
-            //var orderTestAscMethod = testData.OrderBy(x => x.FirstName)
-            //                        .ThenBy(x => x.Age)
-            //                        .Take(5);
-            //var orderTestDesMethod = testData.OrderByDescending(x => x.Age).Take(5);
+            Console.WriteLine("Metod syntax:");
+            PrintResultOnTheScreen(findByAddressMethod);
+            Console.WriteLine();
+            Console.WriteLine("Query syntax");
+            PrintResultOnTheScreen(findByAddressQuery);
 
 
-            //// In query syntax multiple sorting looks like below after comma separated we put next field
-            //var orderTestAscQuery = (from s in testData
-            //                        orderby s.FirstName, s.Address.City ascending
-            //                        select s).Take(5);
 
-            //var orderTestDesQuery = (from s in testData
-            //                         orderby s.Age descending
-            //                         select s).Take(5);
+            var amoutOfElementsMethod = testData.Where(x => x.Age > 20 && x.Age < 25)
+                                          .Count();
 
-            //Console.WriteLine("Metod syntax:");
-            //Console.WriteLine("Asc");
-            //PrintResultOnTheScreen(orderTestAscMethod);
-            //Console.WriteLine("Des");
-            //PrintResultOnTheScreen(orderTestDesMethod);
-            //Console.WriteLine();
-            //Console.WriteLine("Query syntax");
-            //Console.WriteLine("Asc");
-            //PrintResultOnTheScreen(orderTestAscQuery);
-            //Console.WriteLine("Dsc");
-            //PrintResultOnTheScreen(orderTestDesQuery);
+            var amoutOfElementsQuery = (from s in testData
+                                        where s.Age > 20 && s.Age < 25
+                                        select s).Count();
 
-            //Console.WriteLine("Method syntax");
-            //var groupTestMethod = testData.GroupBy(x => x.Address.City);
 
-            //foreach(var gtm in groupTestMethod)
-            //{
-            //    Console.WriteLine($"Group name: {gtm.Key}");
-            //    foreach (var item in gtm)
-            //    {
-            //        Console.WriteLine($"Name: {item.FirstName}, Age: {item.Age}");
-            //    }
-            //}
+            Console.WriteLine("Metod syntax:");
+            PrintResultOnTheScreen(amoutOfElementsMethod);
+            Console.WriteLine();
+            Console.WriteLine("Query syntax");
+            PrintResultOnTheScreen(amoutOfElementsMethod);
 
-            //Console.WriteLine();
-            //Console.WriteLine("Query sytntax");
 
-            //var groupTestQuery = from s in testData
-            //                     orderby s.Age ascending
-            //                     group s by s.Age;
+            //Asc for method syntax we're sorting by one field but if we want to sort through other field we use method 'ThenBy'
+            var orderTestAscMethod = testData.OrderBy(x => x.FirstName)
+                                    .ThenBy(x => x.Age)
+                                    .Take(5);
+            var orderTestDesMethod = testData.OrderByDescending(x => x.Age).Take(5);
 
-            //foreach(var gtq in groupTestQuery)
-            //{
-            //    Console.WriteLine($"Group name: {gtq.Key}");
-            //    foreach (var item in gtq)
-            //    {
-            //        Console.WriteLine($"Name: {item.FirstName}, City: {item.Address.City}");
-            //    }
-            //}
+
+            // In query syntax multiple sorting looks like below after comma separated we put next field
+            var orderTestAscQuery = (from s in testData
+                                     orderby s.FirstName, s.Address.City ascending
+                                     select s).Take(5);
+
+            var orderTestDesQuery = (from s in testData
+                                     orderby s.Age descending
+                                     select s).Take(5);
+
+            Console.WriteLine("Metod syntax:");
+            Console.WriteLine("Asc");
+            PrintResultOnTheScreen(orderTestAscMethod);
+            Console.WriteLine("Des");
+            PrintResultOnTheScreen(orderTestDesMethod);
+            Console.WriteLine();
+            Console.WriteLine("Query syntax");
+            Console.WriteLine("Asc");
+            PrintResultOnTheScreen(orderTestAscQuery);
+            Console.WriteLine("Dsc");
+            PrintResultOnTheScreen(orderTestDesQuery);
+
+            Console.WriteLine("Method syntax");
+            var groupTestMethod = testData.GroupBy(x => x.Address.City);
+
+            foreach (var gtm in groupTestMethod)
+            {
+                Console.WriteLine($"Group name: {gtm.Key}");
+                foreach (var item in gtm)
+                {
+                    Console.WriteLine($"Name: {item.FirstName}, Age: {item.Age}");
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Query sytntax");
+
+            var groupTestQuery = from s in testData
+                                 orderby s.Age ascending
+                                 group s by s.Age;
+
+            foreach (var gtq in groupTestQuery)
+            {
+                Console.WriteLine($"Group name: {gtq.Key}");
+                foreach (var item in gtq)
+                {
+                    Console.WriteLine($"Name: {item.FirstName}, City: {item.Address.City}");
+                }
+            }
 
             var clubList = new List<Club>
             {
@@ -137,121 +137,121 @@ namespace Linq_example.Method
                 new Country { Id = 5, CountryName = "France", ListClubs = clubList.Where(x => x.CountryId == 5).ToList() }
             };
 
-            //// In this example clubList is outer sequence
-            //// countryList is inner sequence, next we define which field should be match using lambda from first and second collection
-            //// Matched elements are adding to result 
-            //var joinTestMethod = clubList.Join(countryList,
-            //                                    club => club.CountryId,
-            //                                    country => country.Id,
-            //                                    (club, country) => new
-            //                                    {
-            //                                        Name = club.Name,
-            //                                        Country = country.CountryName
-            //                                    }).GroupBy(x => x.Country);
+            // In this example clubList is outer sequence
+            // countryList is inner sequence, next we define which field should be match using lambda from first and second collection
+            // Matched elements are adding to result 
+            var joinTestMethod = clubList.Join(countryList,
+                                                club => club.CountryId,
+                                                country => country.Id,
+                                                (club, country) => new
+                                                {
+                                                    Name = club.Name,
+                                                    Country = country.CountryName
+                                                }).GroupBy(x => x.Country);
 
 
-            //foreach (var jtm in joinTestMethod)
-            //{
-            //    Console.WriteLine($"Group name: {jtm.Key}");
-            //    foreach (var item in jtm)
-            //    {
-            //        Console.WriteLine($"Name: {item.Name}, City: {item.Country}");
-            //    }
-            //}
+            foreach (var jtm in joinTestMethod)
+            {
+                Console.WriteLine($"Group name: {jtm.Key}");
+                foreach (var item in jtm)
+                {
+                    Console.WriteLine($"Name: {item.Name}, City: {item.Country}");
+                }
+            }
 
-            //Console.WriteLine("Query:\n");
+            Console.WriteLine("Query:\n");
 
-            //var joinTestQuery = from club in clubList 
-            //                    join country in countryList
-            //                    on club.CountryId equals country.Id
-            //                    select new { Name = club.Name, Country = country.CountryName };
+            var joinTestQuery = from club in clubList
+                                join country in countryList
+                                on club.CountryId equals country.Id
+                                select new { Name = club.Name, Country = country.CountryName };
 
-            //PrintResultOnTheScreen(joinTestQuery);
+            PrintResultOnTheScreen(joinTestQuery);
 
-            //Console.WriteLine("Query Group join:\n");
+            Console.WriteLine("Query Group join:\n");
 
-            //var groupJoinQuery = from country in countryList
-            //                     join club in clubList
-            //                     on country.Id equals club.CountryId
-            //                     into countryGroup
-            //                     select new
-            //                     {
-            //                         Club = countryGroup,
-            //                         Country = country.CountryName
-            //                     };
+            var groupJoinQuery = from country in countryList
+                                 join club in clubList
+                                 on country.Id equals club.CountryId
+                                 into countryGroup
+                                 select new
+                                 {
+                                     Club = countryGroup,
+                                     Country = country.CountryName
+                                 };
 
-            //foreach (var item in groupJoinQuery)
-            //{
-            //    Console.WriteLine($"\n{item.Country}\n");
-            //    foreach (var club in item.Club)
-            //    {
-            //        Console.WriteLine(club.Name);
-            //    }
-            //}
+            foreach (var item in groupJoinQuery)
+            {
+                Console.WriteLine($"\n{item.Country}\n");
+                foreach (var club in item.Club)
+                {
+                    Console.WriteLine(club.Name);
+                }
+            }
 
-            //Console.WriteLine("Method group_join");
-            //var groupJoinTestMethod = countryList.GroupJoin(clubList,
-            //                            x => x.Id,
-            //                            y => y.CountryId,
-            //                            (x, y) => new
-            //                            {
-            //                                Country = x.CountryName,
-            //                                ClubName = x.ListClubs
-            //                            });
-            //foreach (var item in groupJoinQuery)
-            //{
-            //    Console.WriteLine($"\n{item.Country}\n");
-            //    foreach (var club in item.Club)
-            //    {
-            //        Console.WriteLine(club.Name);
-            //    }
-            //}
+            Console.WriteLine("Method group_join");
+            var groupJoinTestMethod = countryList.GroupJoin(clubList,
+                                        x => x.Id,
+                                        y => y.CountryId,
+                                        (x, y) => new
+                                        {
+                                            Country = x.CountryName,
+                                            ClubName = x.ListClubs
+                                        });
+            foreach (var item in groupJoinQuery)
+            {
+                Console.WriteLine($"\n{item.Country}\n");
+                foreach (var club in item.Club)
+                {
+                    Console.WriteLine(club.Name);
+                }
+            }
 
-            //// All - return true if all elements in sequence match to condition
-            //var allTestMethod = clubList.Join(countryList,
-            //                        club => club.CountryId,
-            //                        country => country.Id,
-            //                        (club, country) => new
-            //                        {
-            //                            Club = club.Name,
-            //                            Country = country.CountryName
-            //                        }).All(x => x.Country.Equals("England"));
+            // All - return true if all elements in sequence match to condition
+            var allTestMethod = clubList.Join(countryList,
+                                    club => club.CountryId,
+                                    country => country.Id,
+                                    (club, country) => new
+                                    {
+                                        Club = club.Name,
+                                        Country = country.CountryName
+                                    }).All(x => x.Country.Equals("England"));
 
-            //Console.WriteLine($"Does all clubs are from England: {allTestMethod}");
+            Console.WriteLine($"Does all clubs are from England: {allTestMethod}");
 
-            //// Any 
-            //var anyTestMethod = clubList.Join(countryList,
-            //                        club => club.CountryId,
-            //                        country => country.Id,
-            //                        (club, country) => new
-            //                        {
-            //                            Club = club.Name,
-            //                            Country = country.CountryName
-            //                        }).Any(x => x.Country.Equals("England"));
+            // Any 
+            var anyTestMethod = clubList.Join(countryList,
+                                    club => club.CountryId,
+                                    country => country.Id,
+                                    (club, country) => new
+                                    {
+                                        Club = club.Name,
+                                        Country = country.CountryName
+                                    }).Any(x => x.Country.Equals("England"));
 
-            //Console.WriteLine($"Does any club is from England: {anyTestMethod}");
+            Console.WriteLine($"Does any club is from England: {anyTestMethod}");
 
-            //// Contains comapre reference, we should implements interface IEqualityComparer<T>
+            // Contains comapre reference, we should implements interface IEqualityComparer<T>
 
-            //var testPerson = new Person { Id = 4, FirstName = "Anna", LastName = "Wiśniewska", Age = 21, Address = new Address { City = "Elbląg", Country = "Poland" } };
+            var testPerson = new Person { Id = 4, FirstName = "Anna", LastName = "Wiśniewska", Age = 21, Address = new Address { City = "Elbląg", Country = "Poland" } };
 
-            //var containTestMethod = testData.Contains(testPerson, new ContainClassCompare());
+            var containTestMethod = testData.Contains(testPerson, new ContainClassCompare());
 
-            //Console.WriteLine(containTestMethod);
+            Console.WriteLine(containTestMethod);
 
-            //// Count 
+            // Count 
 
-            //var countTestMethod = testData.Count(x => x.Address.City == "Kraków");
+            var countTestMethod = testData.Count(x => x.Address.City == "Kraków");
 
-            //Console.WriteLine($"Number elements where City is equal Kraków {countTestMethod}");
+            Console.WriteLine($"Number elements where City is equal Kraków {countTestMethod}");
 
-            //var countTestQuery = (from td in testData
-            //                      where td.Address.City == "Kraków"
-            //                      select td).Count();
+            var countTestQuery = (from td in testData
+                                  where td.Address.City == "Kraków"
+                                  select td).Count();
 
-            //Console.WriteLine($"Number elements where City is equal Kraków {countTestQuery}");
+            Console.WriteLine($"Number elements where City is equal Kraków {countTestQuery}");
 
-            
+
 
         }
 
