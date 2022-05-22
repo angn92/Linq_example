@@ -168,27 +168,94 @@ namespace Linq_example.Method
 
             //PrintResultOnTheScreen(joinTestQuery);
 
-            Console.WriteLine("Query Group join:\n");
+            //Console.WriteLine("Query Group join:\n");
 
-            var groupJoinQuery = from country in countryList
-                                 join club in clubList
-                                 on country.Id equals club.CountryId
-                                 into countryGroup
-                                 select new
-                                 {
-                                     Club = countryGroup,
-                                     Country = country.CountryName
-                                 };
+            //var groupJoinQuery = from country in countryList
+            //                     join club in clubList
+            //                     on country.Id equals club.CountryId
+            //                     into countryGroup
+            //                     select new
+            //                     {
+            //                         Club = countryGroup,
+            //                         Country = country.CountryName
+            //                     };
 
-            foreach (var item in groupJoinQuery)
-            {
-                Console.WriteLine($"\n{item.Country}\n");
-                foreach (var club in item.Club)
-                {
-                    Console.WriteLine(club.Name);
-                }
-            }
+            //foreach (var item in groupJoinQuery)
+            //{
+            //    Console.WriteLine($"\n{item.Country}\n");
+            //    foreach (var club in item.Club)
+            //    {
+            //        Console.WriteLine(club.Name);
+            //    }
+            //}
+
+            //Console.WriteLine("Method group_join");
+            //var groupJoinTestMethod = countryList.GroupJoin(clubList,
+            //                            x => x.Id,
+            //                            y => y.CountryId,
+            //                            (x, y) => new
+            //                            {
+            //                                Country = x.CountryName,
+            //                                ClubName = x.ListClubs
+            //                            });
+            //foreach (var item in groupJoinQuery)
+            //{
+            //    Console.WriteLine($"\n{item.Country}\n");
+            //    foreach (var club in item.Club)
+            //    {
+            //        Console.WriteLine(club.Name);
+            //    }
+            //}
+
+            //// All - return true if all elements in sequence match to condition
+            //var allTestMethod = clubList.Join(countryList,
+            //                        club => club.CountryId,
+            //                        country => country.Id,
+            //                        (club, country) => new
+            //                        {
+            //                            Club = club.Name,
+            //                            Country = country.CountryName
+            //                        }).All(x => x.Country.Equals("England"));
+
+            //Console.WriteLine($"Does all clubs are from England: {allTestMethod}");
+
+            //// Any 
+            //var anyTestMethod = clubList.Join(countryList,
+            //                        club => club.CountryId,
+            //                        country => country.Id,
+            //                        (club, country) => new
+            //                        {
+            //                            Club = club.Name,
+            //                            Country = country.CountryName
+            //                        }).Any(x => x.Country.Equals("England"));
+
+            //Console.WriteLine($"Does any club is from England: {anyTestMethod}");
+
+            //// Contains comapre reference, we should implements interface IEqualityComparer<T>
+
+            //var testPerson = new Person { Id = 4, FirstName = "Anna", LastName = "Wiśniewska", Age = 21, Address = new Address { City = "Elbląg", Country = "Poland" } };
+
+            //var containTestMethod = testData.Contains(testPerson, new ContainClassCompare());
+
+            //Console.WriteLine(containTestMethod);
+
+            //// Count 
+
+            //var countTestMethod = testData.Count(x => x.Address.City == "Kraków");
+
+            //Console.WriteLine($"Number elements where City is equal Kraków {countTestMethod}");
+
+            //var countTestQuery = (from td in testData
+            //                      where td.Address.City == "Kraków"
+            //                      select td).Count();
+
+            //Console.WriteLine($"Number elements where City is equal Kraków {countTestQuery}");
+
+            
+
         }
+
+
 
         private void PrintResultOnTheScreen(IEnumerable<Person> list)
         {
